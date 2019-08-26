@@ -1,5 +1,5 @@
 ; Copyright (c) uib gmbh (www.uib.de)
-; This sourcecode is owned by uib gmbh
+; This sourcecode is owned by uib
 ; and published under the Terms of the General Public License.
 ; credits: http://www.opsi.org/en/credits/
 
@@ -8,31 +8,57 @@ requiredWinstVersion >= "4.11.4.4"
 
 DefVar $UninstallProgram$
 DefVar $LogDir$
-DefVar $ExitCode$
-DefVar $ProductId$
+DefVar $ProductId$  
+DefVar $MinimumSpace$
 DefVar $InstallDir$
-DefVar $CustomPostDeinstall$
+DefVar $Setupfile$
+DefVar $InstallSilentOption$
+DefVar $ExitCode$
 DefVar $ProductName$
+DefVar $InstallDirExe$
+DefVar $CustomPostInstall$
+DefVar $CustomPostDeinstall$
+DefVar $Updater$
+DefVar $Language$
+DefVar $LangSourceFile$
+DefStringList $list$
 
 Set $LogDir$ = "%opsiLogDir%"
 
-; ----------------------------------------------------------------
-Set $ProductId$		= "notepadpp"
-Set $ProductName$	= "Notepad++"
-Set $InstallDir$	= "%ProgramFiles32Dir%\Notepad++"
+Set $ProductId$		= "teska-wlan-psk"
+Set $ProductName$	= "teska-wlan-psk"
+Set $MinimumSpace$	= "1 MB"
+
 ; ----------------------------------------------------------------
 
-comment "Show product picture"
-if (FileExists("%ScriptPath%\..\lib\icons\%installingProdName%.png"))
-	comment "logo at local library/icon found."
-	ShowBitmap "%ScriptPath%\..\lib\icons\%installingProdName%.png" $ProductName$
+set $list$ = GetProductPropertyList ("uninstallwlanssid","True")
+comment "Loop over List"
+for %pocindex% = "0" to calculate(count($list$)+"-1") do sub_set_clientid_in_poclist
+;if not ("" = takeFirstStringContaining($list$,"g,h"))
+;        comment "GetProductPropertyList passed"
+;else
+;        set $TestResult$ = "not o.k."
+;        LogWarning "GetProductPropertyList failed"
+;endif
+
+
+
+ChangeDirectory "%SCRIPTPATH%"
+if not(HasMinimumSpace ("%SystemDrive%", $MinimumSpace$))
+        LogError "Not enough space on %SystemDrive%, " + $MinimumSpace$ + " on drive %SystemDrive% needed for " + $ProductId$
+        isFatalError "No Space"
 else
-	comment "no logo at local library/icon, use from ScriptPath ..."
-	ShowBitmap "%ScriptPath%\o4i.png" $ProductName$
+        comment "Space OK"
 endif
-Message "Uninstalling " + $ProductId$ + " ..."
 
-if FileExists("%ScriptPath%\delsub32.opsiscript")
-	comment "Start uninstall sub section"
-	Sub "%ScriptPath%\delsub32.opsiscript"
-endif
+
+Message "Configuring %installingProdName% (%installingProdVersion%) ..."
+comment "Start setup program"
+
+[sub_set_clientid_in_poclist]
+set $objectStr$ = takeString("%pocindex%", $list$)
+DosInAnIcon_remove_wlan
+
+[DosInAnIcon_remove_wlan]
+netsh wlan delete profile name="$objectStr$"
+

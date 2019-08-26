@@ -1,7 +1,6 @@
 [Package]
 version: 1
 depends: 
-incremental: False
 
 [Product]
 type: localboot
@@ -14,7 +13,7 @@ priority: 0
 licenseRequired: False
 productClasses: 
 setupScript: setup.opsiscript
-uninstallScript: 
+uninstallScript: uninstall.opsiscript 
 updateScript: 
 alwaysScript: 
 onceScript: 
@@ -24,11 +23,9 @@ userLoginScript:
 [ProductProperty]
 type: unicode
 name: uninstallwlanssid
-multivalue: true
-editable: true
+multivalue: True
+editable: True
 description: Uninstall existing wlan config on client
 values: ["Schule-Byod", "Test"]
-default: ["none"]
+default: []
 
-
-[Changelog]
