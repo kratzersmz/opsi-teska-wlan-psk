@@ -13,7 +13,7 @@ priority: 0
 licenseRequired: False
 productClasses: 
 setupScript: setup.opsiscript
-uninstallScript: uninstall.opsiscript 
+uninstallScript: uninstall.opsiscript
 updateScript: 
 alwaysScript: 
 onceScript: 
@@ -26,6 +26,6 @@ name: uninstallwlanssid
 multivalue: True
 editable: True
 description: Uninstall existing wlan config on client
-values: ["Schule-Byod", "Test"]
+values: ["Schule", "Schule-Byod", "Test"]
 default: []
 
