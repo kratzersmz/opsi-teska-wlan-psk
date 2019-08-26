@@ -1,0 +1,34 @@
+[Package]
+version: 1
+depends: 
+incremental: False
+
+[Product]
+type: localboot
+id: teska-wlan-psk
+name: teska-wlan-psk
+description: Edit wlan-psk.xml to set SSID + Password on Opsi Server in depot
+advice: 
+version: 1.0
+priority: 0
+licenseRequired: False
+productClasses: 
+setupScript: setup.opsiscript
+uninstallScript: 
+updateScript: 
+alwaysScript: 
+onceScript: 
+customScript: 
+userLoginScript: 
+
+[ProductProperty]
+type: unicode
+name: uninstallwlanssid
+multivalue: true
+editable: true
+description: Uninstall existing wlan config on client
+values: ["Schule-Byod", "Test"]
+default: ["none"]
+
+
+[Changelog]
