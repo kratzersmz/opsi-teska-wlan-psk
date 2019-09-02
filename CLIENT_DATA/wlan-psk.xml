@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">
-	<name>SCHULE</name>
+	<name>NAME-WLAN</name>
 	<SSIDConfig>
 		<SSID>
-			<name>SCHULE</name>
+			<name>NAME-WLAN</name>
 		</SSID>
 	</SSIDConfig>
 	<connectionType>ESS</connectionType>
