@@ -66,4 +66,4 @@ netsh wlan delete profile name="$objectStr$"
 
 [DosInAnIcon_install]
 netsh wlan add profile filename="%ScriptPath%\wlan-psk.xml" user=all
-
+ExitWindows /Reboot
