@@ -22,6 +22,8 @@ DefVar $Updater$
 DefVar $Language$
 DefVar $LangSourceFile$
 DefStringList $list$
+DefVar $wlanpassword$
+DefVar $objectStr$
 
 Set $LogDir$ = "%opsiLogDir%"
 

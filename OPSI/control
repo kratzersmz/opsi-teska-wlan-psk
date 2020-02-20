@@ -8,7 +8,7 @@ id: teska-wlan-psk
 name: teska-wlan-psk
 description: Edit wlan-psk.xml to set SSID + Password on Opsi Server in depot
 advice: 
-version: 1.0
+version: 1.1
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -20,6 +20,26 @@ onceScript:
 customScript: 
 userLoginScript: 
 
+;[ProductProperty]
+;type: unicode
+;name: wlanssid
+;multivalue: False
+;editable: True
+;description: SSID of WLAN
+;values: ["Schule", "Schule-Byod", "Test"]
+;default: []
+
+;[ProductProperty]
+;type: unicode
+;name: wlanpassword
+;multivalue: False
+;editable: True
+;description: Password, case sensitive!!
+;values: ["3k34jlkj30988843ju34kjlwfkjas", "4444444StrengGeheim"]
+;default: []
+
+
+
 [ProductProperty]
 type: unicode
 name: uninstallwlanssid
@@ -28,4 +48,5 @@ editable: True
 description: Uninstall existing wlan config on client
 values: ["Schule", "Schule-Byod", "Test"]
 default: []
+
 
